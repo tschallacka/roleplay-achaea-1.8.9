@@ -1,0 +1,16 @@
+[
+    {
+      "modid": "achaea",      
+      "name": "Achaean Roleplay",
+      "description": "A mod to assist with roleplay events on a server.",
+      "version": "${version}",
+      "mcversion": "${mcversion}", 
+      "url": "https://www.github.com/tschallacka",
+      "updateUrl": "",
+      "authorList": ["Tschallacka"],
+      "credits": "The Forge and FML guys, for making forge, keeping it up to date and being generally awesome. The mods at http://thaumcraft.duckdns.org for giving the idea and running this with love. The online game Achaea, a text based MMORPG which is awesome and has a very large world.",
+      "logoFile": "assets/achaea/mcmod/logo.png",
+      "screenshots": [],
+      "dependencies": [] 
+    }
+]
