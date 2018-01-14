@@ -5,9 +5,9 @@ import tschallacka.achaea.blocks.interfaces.INamedPropertyEnum;
 
 public enum ChimeranType implements IStringSerializable, INamedPropertyEnum
 {
-    CHIMERAN_BRICK_GRAFITTI(0, "chimeran_brick_graffiti"), 
+    CHIMERAN_BRICK(0, "chimeran_brick"),
     CHIMERAN_BRICK_DRAIN(1, "chimeran_brick_drain"), 
-    CHIMERAN_BRICK(2, "chimeran_brick"), 
+    CHIMERAN_BRICK_GRAFITTI(2, "chimeran_brick_graffiti"), 
     CHIMERAN_CONCRETE(3, "chimeran_concrete"), 
     CHIMERAN_BRICK_CRACKED(4, "chimeran_brick_cracked"), 
     ; 

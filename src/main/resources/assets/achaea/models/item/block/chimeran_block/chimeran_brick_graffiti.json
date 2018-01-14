@@ -1,5 +1,5 @@
 {
-    "parent":"achaea:block/chimeran_block",
+    "parent":"achaea:block/chimeran/chimeran_brick_graffiti",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

@@ -17,6 +17,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import tschallacka.achaea.Achaea;
 import tschallacka.achaea.blocks.interfaces.IMetaBlockName;
+import tschallacka.achaea.blocks.interfaces.INamedPropertyEnum;
 /**
  * https://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-8/first-block/
  */
@@ -59,16 +60,17 @@ public class ChimeranBlock extends Block implements IMetaBlockName
         return getDefaultState().withProperty(TYPE, this.getTypeByMeta(meta));
         
     }
-    public ChimeranType getTypeByMeta(int meta) 
+    public INamedPropertyEnum getTypeByMeta(int meta) 
     {
         ChimeranType type;
         
         switch( meta ) {
+            case 0: type = ChimeranType.CHIMERAN_BRICK;break;
             case 1: type = ChimeranType.CHIMERAN_BRICK_DRAIN;break;
             case 2: type = ChimeranType.CHIMERAN_BRICK_GRAFITTI;break;
             case 3: type = ChimeranType.CHIMERAN_CONCRETE;break;
             case 4: type = ChimeranType.CHIMERAN_BRICK_CRACKED;break;
-            default:type = ChimeranType.CHIMERAN_BRICK;break;
+            default: type =  ChimeranType.CHIMERAN_BRICK_GRAFITTI;break;
         }
         return type;
     }
@@ -88,7 +90,7 @@ public class ChimeranBlock extends Block implements IMetaBlockName
     @Override
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List list) 
     {
-        list.add(new ItemStack(itemIn, 1, 0)); //Meta 0
+        list.add(new ItemStack(itemIn, 1, 0)); //brick
         list.add(new ItemStack(itemIn, 1, 1)); //Meta 1
         list.add(new ItemStack(itemIn, 1, 2)); //Meta 2
         list.add(new ItemStack(itemIn, 1, 3)); //Meta 3

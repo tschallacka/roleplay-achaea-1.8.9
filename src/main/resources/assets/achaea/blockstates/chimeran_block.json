@@ -1,9 +1,9 @@
 {
     "comment":"This references the models/block/model_name(without json extension) for the rendering",
     "variants": {
-        "type=chimeran_brick_graffiti": { "model":"achaea:chimeran/chimeran_brick_graffiti" },
-        "type=chimeran_brick_drain": { "model":"achaea:chimeran/chimeran_brick_drain" },
         "type=chimeran_brick": { "model":"achaea:chimeran/chimeran_brick" },
+        "type=chimeran_brick_drain": { "model":"achaea:chimeran/chimeran_brick_drain" },
+        "type=chimeran_brick_graffiti": { "model":"achaea:chimeran/chimeran_brick_graffiti" },
         "type=chimeran_concrete": { "model":"achaea:chimeran/chimeran_concrete" },
         "type=chimeran_brick_cracked": { "model":"achaea:chimeran/chimeran_brick_cracked" }
     }
