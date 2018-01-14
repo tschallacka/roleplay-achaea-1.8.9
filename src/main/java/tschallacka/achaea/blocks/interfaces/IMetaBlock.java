@@ -2,8 +2,7 @@ package tschallacka.achaea.blocks.interfaces;
 
 import net.minecraft.item.ItemStack;
 
-public interface IMetaBlockName {
-        INamedPropertyEnum getTypeByMeta(int meta);
+public interface IMetaBlock {
         
         String getSpecialName(ItemStack stack);
 }

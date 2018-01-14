@@ -16,20 +16,18 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import tschallacka.achaea.Achaea;
-import tschallacka.achaea.blocks.interfaces.IMetaBlockName;
+import tschallacka.achaea.blocks.interfaces.IMetaBlock;
 import tschallacka.achaea.blocks.interfaces.INamedPropertyEnum;
 /**
  * https://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-8/first-block/
  */
-public class ChimeranBlock extends Block implements IMetaBlockName
+public class ChimeranBlock extends Block implements IMetaBlock
 {
     public static final PropertyEnum TYPE = PropertyEnum.create("type", ChimeranType.class);
 
-	public ChimeranBlock(String unlocalizedName, Material material, float hardness, float resistance) 
+	public ChimeranBlock( Material material, float hardness, float resistance) 
 	{
         super(material);
-        this.setUnlocalizedName(unlocalizedName);
-        this.setRegistryName(unlocalizedName);
         this.setCreativeTab(Achaea.creativeTab);
         this.setHardness(hardness);
         this.setResistance(resistance);
@@ -37,14 +35,14 @@ public class ChimeranBlock extends Block implements IMetaBlockName
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, ChimeranType.CHIMERAN_BRICK));
     }
 	
-	public ChimeranBlock(String unlocalizedName, float hardness, float resistance) 
+	public ChimeranBlock(float hardness, float resistance) 
 	{
-        this(unlocalizedName, Material.rock, hardness, resistance);
+        this(Material.rock, hardness, resistance);
     }
 
-    public ChimeranBlock(String unlocalizedName) 
+    public ChimeranBlock() 
     {
-        this(unlocalizedName, 2.0f, 10.0f);
+        this(2.0f, 10.0f);
     }
 
     @Override

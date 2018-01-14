@@ -1,6 +1,7 @@
 package tschallacka.achaea.client.render.blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -14,85 +15,90 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import tschallacka.achaea.Achaea;
 import tschallacka.achaea.blocks.AchaeanBlocks;
-import tschallacka.achaea.blocks.interfaces.IMetaBlockName;
+import tschallacka.achaea.blocks.interfaces.IMetaBlock;
 import tschallacka.achaea.blocks.interfaces.INamedPropertyEnum;
 import tschallacka.achaea.blocks.stone.chimeran.ChimeranType;
 
 public final class BlockRenderRegister 
 {
+    private int cutLength = 0;
+    private BlockRenderRegister() 
+    {
+        this.cutLength = Achaea.MODID.length() + 1;
+    }
     
-
 	public static void registerItemBlockVariants() 
 	{
-	    registerAllVariants(AchaeanBlocks.CHIMERAN,ChimeranType.CHIMERAN_BRICK);
-	    
-	    
+	    BlockRenderRegister registrar = new BlockRenderRegister();
+	    registrar.registerAllVariants(AchaeanBlocks.CHIMERAN);
 	}
-	private static void registerAllVariants(Block block, INamedPropertyEnum type) 
+	
+	/**
+	 * This method loops through all variants that are offered to creativeTab.
+	 * When an item should not be registered to a tab but only available ingame,
+	 * make a check that the tab offered is NULL
+	 * 
+	 * It then checks if the block is an instance of IMetaBlockName.
+	 * If it is it will use the names provided in getSpecialName() to register the item variant models in
+	 * assets/achaea/models/item/block/REGISTRY_NAME/SPECIAL_NAME.json
+	 * 
+	 * If it's not it will register the block under the block name.
+	 * assets/achaea/models/item/block/REGISTRY_NAME/REGISTRY_NAME.json
+	 * 
+	 * @see net.minecraft.block.Block#getSubBlocks(Item, net.minecraft.creativetab.CreativeTabs, List)
+	 * @see  tschallacka.achaea.blocks.interfaces.IMetaBlock
+	 * @param block The Block to register
+	 * @param type
+	 */
+	private void registerAllVariants(Block block) 
     {
-	    INamedPropertyEnum[] types = type.getValues();
+	    
 	    Item item = Item.getItemFromBlock(block);
-	    ArrayList<ItemStack> list = new ArrayList<ItemStack>(16);
-	    block.getSubBlocks(item, null, list);
-	    String blockName = item.getRegistryName().substring(Achaea.MODID.length() + 1);
+	    
+	    String blockName = this.getName(item);
+	    
 	    Achaea.log("Registering block items for " + item.getRegistryName());
-	    for(ItemStack stack : list) {
-	        if(stack != null) {
-	            
-	            if(block instanceof IMetaBlockName) {
-	                IMetaBlockName metaBlock = (IMetaBlockName)block;
-	                INamedPropertyEnum property = metaBlock.getTypeByMeta(stack.getMetadata());
-	                Achaea.log("    Variant "+stack.getMetadata()+" name " + Achaea.MODID + ":" + property.getName());
-	                ModelLoader.setCustomModelResourceLocation(item, 
-                            stack.getMetadata(), 
-                            new ModelResourceLocation(Achaea.MODID+":block/"+blockName+"/"+property.getName(), "inventory"));
+	    
+	    for(ItemStack stack : getItems(block)) {
+	        if(stack != null) {	            
+	            if(block instanceof IMetaBlock) {
+	                
+	              this.registerMetaBlock((IMetaBlock)block, stack, blockName);
 	            }
 	            else {
-	                ModelLoader.setCustomModelResourceLocation(item, 
-                            stack.getMetadata(), 
-                            new ModelResourceLocation(type.getName(), "inventory"));
+	                this.registerBlock(item, stack, Achaea.MODID + ":block/" + blockName + "/" + blockName);
 	            }
 	        }
 	    }
 	    
 	}
 	
-	private static ResourceLocation[] getResourceLocationsForType(INamedPropertyEnum type) 
-	{
-	    INamedPropertyEnum[] types = type.getValues();
-	    ResourceLocation[] locations = new ResourceLocation[types.length];
-	    for(int c = 0; c < types.length; c++) {
-	        locations[c] = getResourceLocationFromProperty(types[c]);
-	    }
-	    return locations;
+	private void registerMetaBlock(IMetaBlock block, ItemStack stack, String blockName) {
+	    
+        String variantName = block.getSpecialName(stack);
+        
+        Achaea.log("    Variant "+stack.getMetadata()+" name " + Achaea.MODID + ":" + variantName);
+        
+        this.registerBlock(stack.getItem(), 
+                            stack, 
+                            Achaea.MODID + ":block/" + blockName + "/" + variantName);
 	}
 	
-	private static ResourceLocation getModelResourceLocationFromProperty(INamedPropertyEnum type) 
-    {
-        return new ResourceLocation(Achaea.MODID
-                                    + ":"
-                                   // + "block/"
-                                    //+ BlockRenderRegister.getClassName(type)
-                                    //+ "/"
-                                    + type.getName());
-    }
-	
-	private static ResourceLocation getResourceLocationFromProperty(INamedPropertyEnum type) 
-	{
-	    return new ResourceLocation(Achaea.MODID
-	                                + ":"
-	                                //+ "block/"
-	                                //+ BlockRenderRegister.getClassName(type)
-	                                //+ "/"
-	                                + type.getName());
+	private void registerBlock(Item item, ItemStack stack, String name) {
+	    ModelLoader.setCustomModelResourceLocation(item, 
+                stack.getMetadata(), 
+                new ModelResourceLocation(name, "inventory"));
 	}
 	
+	private String getName(Item item) 
+	{
+	    return item.getRegistryName().substring(this.cutLength);
+	}
 	
-	private static String getClassName(INamedPropertyEnum clazz) {
-	    return clazz.getClass()
-	           .getSimpleName()
-	           .toLowerCase()
-	           .replaceAll("/[^A-Za-z]/", "")
-	           .trim();
+	private List<ItemStack> getItems(Block block) {
+	    Item item = Item.getItemFromBlock(block);
+	    ArrayList<ItemStack> list = new ArrayList<ItemStack>(16);
+        block.getSubBlocks(item, null, list);
+        return list;
 	}
 }
