@@ -8,4 +8,13 @@ tile.chimeran_block.chimeran_brick_drain.name=Chimeran Drain
 tile.chimeran_block.chimeran_brick_cracked.name=Chimeran Cracked Brick
 
 tile.chimeran_brick_stair.name=Chimeran Brick Stair
-tile.chimeran_cracked_brick_stair.name=Chimeran Cracked Brick Stair
+tile.chimeran_brick_cracked_stair.name=Chimeran Cracked Brick Stair
+tile.chimeran_concrete_stair.name=Chimeran Concrete Stair
+
+tile.stone_fence.chimeran_brick_fence.name=Chimeran Brick Fence
+tile.stone_fence.chimeran_brick_cracked_fence.name=Chimeran Cracked Brick Fence
+tile.stone_fence.chimeran_concrete_fence.name=Chimeran Concrete Fence
+
+tile.stone_wall.chimeran_brick_wall.name=Chimeran Brick Wall
+tile.stone_wall.chimeran_brick_cracked_wall.name=Chimeran Cracked Brick Wall
+tile.stone_wall.chimeran_concrete_wall.name=Chimeran Concrete Wall

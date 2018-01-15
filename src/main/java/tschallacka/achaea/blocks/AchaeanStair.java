@@ -1,4 +1,4 @@
-package tschallacka.achaea.blocks.stone.chimeran;
+package tschallacka.achaea.blocks;
 
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;

@@ -1,21 +1,19 @@
-package tschallacka.achaea.blocks.stone.chimeran;
+package tschallacka.achaea.blocks.blocktype;
 
 import net.minecraft.util.IStringSerializable;
 import tschallacka.achaea.blocks.interfaces.INamedProperty;
 
-public enum ChimeranType implements IStringSerializable, INamedProperty
+public enum StoneFenceType implements IStringSerializable, INamedProperty
 {
-    CHIMERAN_BRICK(0, "chimeran_brick"),
-    CHIMERAN_BRICK_DRAIN(1, "chimeran_brick_drain"), 
-    CHIMERAN_BRICK_GRAFITTI(2, "chimeran_brick_graffiti"), 
-    CHIMERAN_CONCRETE(3, "chimeran_concrete"), 
-    CHIMERAN_BRICK_CRACKED(4, "chimeran_brick_cracked"), 
+    CHIMERAN_BRICK_FENCE(0, "chimeran_brick_fence"), 
+    CHIMERAN_CONCRETE_FENCE(1, "chimeran_concrete_fence"), 
+    CHIMERAN_BRICK_CRACKED_FENCE(2, "chimeran_brick_cracked_fence"), 
     ; 
     
     private int ID;
     private String name;
 
-    private ChimeranType(int ID, String name) {
+    private StoneFenceType(int ID, String name) {
         this.ID = ID;
         this.name = name;
     }
@@ -39,10 +37,10 @@ public enum ChimeranType implements IStringSerializable, INamedProperty
         return this.name;
     }
 
-	@Override
-	public INamedProperty[] getValues() {
-		return this.values();
-	}
+    @Override
+    public INamedProperty[] getValues() {
+        return this.values();
+    }
 
 
 }

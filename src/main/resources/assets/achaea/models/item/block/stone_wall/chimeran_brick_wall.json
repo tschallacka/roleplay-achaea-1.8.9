@@ -1,0 +1,13 @@
+{
+    "parent": "block/wall_inventory",
+    "textures": {
+        "wall":"achaea:blocks/chimeran/brick"
+    },
+    "display": {
+        "thirdperson": {
+            "rotation": [ 10, -45, -10 ],
+            "translation": [ 0, 1.5, -2.75 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    }
+}

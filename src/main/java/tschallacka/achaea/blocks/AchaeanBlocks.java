@@ -5,12 +5,16 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import tschallacka.achaea.Achaea;
 import tschallacka.achaea.blocks.interfaces.IMetaBlock;
 import tschallacka.achaea.blocks.interfaces.INamedProperty;
-import tschallacka.achaea.blocks.stone.chimeran.AchaeanStair;
+import tschallacka.achaea.blocks.AchaeanStair;
+import tschallacka.achaea.blocks.stone.StoneFence;
+import tschallacka.achaea.blocks.stone.StoneWall;
 import tschallacka.achaea.blocks.stone.chimeran.ChimeranBlock;
 import tschallacka.achaea.blocks.stone.chimeran.ChimeranType;
 import tschallacka.achaea.item.blocks.ItemBlockMeta;
@@ -29,6 +33,10 @@ public final class AchaeanBlocks {
 	public static AchaeanStair CHIMERAN_CRACKED_BRICK_STAIR;
 
 	public static AchaeanStair CHIMERAN_CONCRETE_STAIR;
+	
+	public static StoneFence STONE_FENCE;
+	
+	public static StoneWall STONE_WALL; 
     /**
      * Called in preInit
      * @see tschallacka.achaea.proxy.CommonProxy#preInit(net.minecraftforge.fml.common.event.FMLPreInitializationEvent)
@@ -36,20 +44,64 @@ public final class AchaeanBlocks {
     public static void createBlocks() 
     {
         AchaeanBlocks blocks = new AchaeanBlocks();
+        
         blocks.registerMetaBlock(CHIMERAN = new ChimeranBlock(), "chimeran_block");
+        blocks.registerMetaBlock(STONE_FENCE = new StoneFence(), "stone_fence");
+        blocks.registerMetaBlock(STONE_WALL = new StoneWall(), "stone_wall");
+        
         CHIMERAN_BRICK_STAIR = blocks.registerStair(CHIMERAN, ChimeranType.CHIMERAN_BRICK);
         CHIMERAN_CRACKED_BRICK_STAIR = blocks.registerStair(CHIMERAN, ChimeranType.CHIMERAN_BRICK_CRACKED);
         CHIMERAN_CONCRETE_STAIR = blocks.registerStair(CHIMERAN, ChimeranType.CHIMERAN_CONCRETE);
+        
     }
     
-    public static AchaeanStair registerStair(Block parent, INamedProperty property) {
+    
+    /**
+     * Registers a stair on basis of the INamed Property.
+     * Will need a blockstate in /assets/blockstates/[PROPERTY_NAME]_stair.json
+     * Will need a item model in /assets/models/item/block/[PROPERTY_NAME]_stair/[PROPERTY_NAME]_stair.json
+     * @param parent The block that provides the textures
+     * @param property The property to make the stair from
+     * @return The stair block
+     */
+    private AchaeanStair registerStair(Block parent, INamedProperty property) 
+    {
         IBlockState state = parent.getStateFromMeta(property.getID());
-        AchaeanStair stair = new AchaeanStair(state, property.getName()+"_stair");
+        AchaeanStair stair = new AchaeanStair(state, property.toString() +"_stair");
+        GameRegistry.registerBlock(stair);
+        blocks.add(stair);
+        return stair;    
+    }
+    
+    /**
+     * Registers a stair on basis of the INamed Property.
+     * Will need a blockstate in /assets/blockstates/[BLOCK_REGISTRY_NAME]_[META]_stair.json
+     * Will need a item model in /assets/models/item/block/[BLOCK_REGISTRY_NAME]_[META]_stair/[BLOCK_REGISTRY_NAME]_[META]_stair.json
+     * @param parent The block that provides the textures
+     * @param meta The meta state of the block to make the stair from
+     * @return The stair block
+     */
+    private AchaeanStair registerStair(Block parent, int meta) 
+    {
+        return this.registerStair(parent, meta, Item.getItemFromBlock(parent).getRegistryName().substring(Achaea.MODID.length()+1) + "_" + meta);
+    }
+    
+    /**
+     * Registers a stair on basis of the INamed Property.
+     * Will need a blockstate in /assets/blockstates/[NAME]_stair.json
+     * Will need a item model in /assets/models/item/block/[NAME]_stair/[NAME]_stair.json
+     * @param parent The block that provides the textures
+     * @param meta The meta state of the block to make the stair from
+     * @return The stair block
+     */
+    private AchaeanStair registerStair(Block parent, int meta, String name) 
+    {
+        IBlockState state = parent.getStateFromMeta(meta);
+        AchaeanStair stair = new AchaeanStair(state, name+"_stair");
         GameRegistry.registerBlock(stair);
         blocks.add(stair);
         return stair;
     }
-    
     /**
      * Registers a block to the gameregistry.<BR/>
      * There needs to be a blockstate json in <BR/>

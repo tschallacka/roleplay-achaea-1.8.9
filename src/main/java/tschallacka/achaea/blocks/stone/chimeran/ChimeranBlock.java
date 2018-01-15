@@ -16,12 +16,13 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import tschallacka.achaea.Achaea;
+import tschallacka.achaea.blocks.AchaeanBlock;
 import tschallacka.achaea.blocks.interfaces.IMetaBlock;
 import tschallacka.achaea.blocks.interfaces.INamedProperty;
 /**
  * https://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-8/first-block/
  */
-public class ChimeranBlock extends Block implements IMetaBlock
+public class ChimeranBlock extends AchaeanBlock implements IMetaBlock
 {
     public static final PropertyEnum TYPE = PropertyEnum.create("type", ChimeranType.class);
 
@@ -52,14 +53,12 @@ public class ChimeranBlock extends Block implements IMetaBlock
     }
     
     @Override
-    public IBlockState getStateFromMeta(int meta) {
-        
-        
+    public IBlockState getStateFromMeta(int meta) {    
         return getDefaultState().withProperty(TYPE, this.getTypeByMeta(meta));
         
     }
-    public INamedProperty getTypeByMeta(int meta) 
-    {
+    
+    public ChimeranType getTypeByMeta(int meta) { 
         ChimeranType type;
         
         switch( meta ) {
@@ -70,8 +69,10 @@ public class ChimeranBlock extends Block implements IMetaBlock
             case 4: type = ChimeranType.CHIMERAN_BRICK_CRACKED;break;
             default: type =  ChimeranType.CHIMERAN_BRICK_GRAFITTI;break;
         }
+        
         return type;
     }
+    
     
     @Override
     public String getSpecialName(ItemStack stack) 

@@ -1,0 +1,77 @@
+{
+    "forge_marker": 1,
+    "comment":"This references the models/block/model_name(without json extension) for the rendering",
+    "variants": {
+       "afree":{
+           "none" : {
+               "model":"achaea:submodels/wallpost"
+           },
+           "rotated" : {
+               "model": "achaea:submodels/wallbars_large", 
+               "y": 90,
+               "submodel": {
+                    "bars_west" : {"model": "achaea:submodels/none" },
+                    "bars_east" : {"model": "achaea:submodels/none" },
+                    "bars_north" : {"model": "achaea:submodels/none" },
+                    "bars_south" : {"model": "achaea:submodels/none" }
+                }
+               
+           },
+           "show" : {
+               "model":"achaea:submodels/wallbars_large",
+               "submodel": {
+                    "bars_west" : {"model": "achaea:submodels/none" },
+                    "bars_east" : {"model": "achaea:submodels/none" },
+                    "bars_north" : {"model": "achaea:submodels/none" },
+                    "bars_south" : {"model": "achaea:submodels/none" }
+                }
+           }
+       },
+       "east":{
+           "true" : {
+               "submodel": {
+                    "bars_east" : {"model": "achaea:submodels/wallbars", "y": 90, "uvlock": true }
+                }
+           },
+           "false" : {
+               "submodel": {
+               }
+               
+           }
+       },
+       "west":{
+           "true" : {
+                 "submodel": {
+                    "bars_west" : {"model": "achaea:submodels/wallbars", "y": 270, "uvlock": true }
+                }
+           },
+           "false" : {
+                "submodel": {
+               }
+                
+           }
+       },
+       "south":{
+           "true" : {
+                "submodel": {
+                    "bars_south" : {"model": "achaea:submodels/wallbars", "y": 180, "uvlock": true }
+                }
+           },
+           "false" : {
+                "submodel": {
+               }
+           }
+       },
+       "north":{
+           "true" : {
+                "submodel": {
+                    "bars_north" : {"model": "achaea:submodels/wallbars", "uvlock": true}
+                }
+           },
+           "false" : {
+                "submodel": {
+               }
+           }
+       }
+   }
+}

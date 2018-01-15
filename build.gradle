@@ -13,6 +13,7 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'java'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 /*
