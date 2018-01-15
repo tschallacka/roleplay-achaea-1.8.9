@@ -1,7 +1,7 @@
 package tschallacka.achaea.blocks.interfaces;
 
-public interface INamedPropertyEnum {
-    public INamedPropertyEnum[] getValues();
+public interface INamedProperty {
+    public INamedProperty[] getValues();
     public int getID();
     public String getName();
 }

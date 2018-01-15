@@ -16,7 +16,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import tschallacka.achaea.Achaea;
 import tschallacka.achaea.blocks.AchaeanBlocks;
 import tschallacka.achaea.blocks.interfaces.IMetaBlock;
-import tschallacka.achaea.blocks.interfaces.INamedPropertyEnum;
+import tschallacka.achaea.blocks.interfaces.INamedProperty;
 import tschallacka.achaea.blocks.stone.chimeran.ChimeranType;
 
 public final class BlockRenderRegister 
@@ -30,9 +30,21 @@ public final class BlockRenderRegister
 	public static void registerItemBlockVariants() 
 	{
 	    BlockRenderRegister registrar = new BlockRenderRegister();
-	    registrar.registerAllVariants(AchaeanBlocks.CHIMERAN);
+	    registrar.registerAchaeanBlocks();
 	}
 	
+	/**
+	 * Registers all item blocks for blocks registered in 
+	 * AchaeanBlocks
+	 * @see tschallacka.achaea.blocks.AchaeanBlocks#getBlocks()
+	 */
+	private void registerAchaeanBlocks() 
+	{
+	    for(Block block : AchaeanBlocks.getBlocks()) {
+	        this.registerAllVariants(block);
+	    }
+	}
+
 	/**
 	 * This method loops through all variants that are offered to creativeTab.
 	 * When an item should not be registered to a tab but only available ingame,

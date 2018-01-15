@@ -1,9 +1,9 @@
 package tschallacka.achaea.blocks.stone.chimeran;
 
 import net.minecraft.util.IStringSerializable;
-import tschallacka.achaea.blocks.interfaces.INamedPropertyEnum;
+import tschallacka.achaea.blocks.interfaces.INamedProperty;
 
-public enum ChimeranType implements IStringSerializable, INamedPropertyEnum
+public enum ChimeranType implements IStringSerializable, INamedProperty
 {
     CHIMERAN_BRICK(0, "chimeran_brick"),
     CHIMERAN_BRICK_DRAIN(1, "chimeran_brick_drain"), 
@@ -37,7 +37,7 @@ public enum ChimeranType implements IStringSerializable, INamedPropertyEnum
     }
 
 	@Override
-	public INamedPropertyEnum[] getValues() {
+	public INamedProperty[] getValues() {
 		return this.values();
 	}
 

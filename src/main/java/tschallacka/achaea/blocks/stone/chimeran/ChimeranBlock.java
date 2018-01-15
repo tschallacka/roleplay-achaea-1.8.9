@@ -17,7 +17,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import tschallacka.achaea.Achaea;
 import tschallacka.achaea.blocks.interfaces.IMetaBlock;
-import tschallacka.achaea.blocks.interfaces.INamedPropertyEnum;
+import tschallacka.achaea.blocks.interfaces.INamedProperty;
 /**
  * https://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-8/first-block/
  */
@@ -58,7 +58,7 @@ public class ChimeranBlock extends Block implements IMetaBlock
         return getDefaultState().withProperty(TYPE, this.getTypeByMeta(meta));
         
     }
-    public INamedPropertyEnum getTypeByMeta(int meta) 
+    public INamedProperty getTypeByMeta(int meta) 
     {
         ChimeranType type;
         
@@ -107,4 +107,6 @@ public class ChimeranBlock extends Block implements IMetaBlock
         ChimeranType type = (ChimeranType) state.getValue(TYPE);
         return type.getID();
     }
+
+	
 }

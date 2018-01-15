@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "achaea:blocks/chimeran/concrete",
+        "top": "achaea:blocks/chimeran/concrete",
+        "side": "achaea:blocks/chimeran/concrete"
+    }
+}
