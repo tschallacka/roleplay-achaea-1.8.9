@@ -18,3 +18,7 @@ tile.stone_fence.chimeran_concrete_fence.name=Chimeran Concrete Fence
 tile.stone_wall.chimeran_brick_wall.name=Chimeran Brick Wall
 tile.stone_wall.chimeran_brick_cracked_wall.name=Chimeran Cracked Brick Wall
 tile.stone_wall.chimeran_concrete_wall.name=Chimeran Concrete Wall
+
+tile.stone_slab.chimeran_brick_slab.name=Chimeran Brick Slab
+tile.stone_slab.chimeran_brick_cracked_slab.name=Chimeran Cracked Brick Slab
+tile.stone_slab.chimeran_concrete_slab.name=Chimeran Concrete Slab

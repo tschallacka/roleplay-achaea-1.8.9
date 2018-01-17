@@ -1,0 +1,31 @@
+{
+    "forge_marker": 1,
+    "comment":"This references the models/block/model_name(without json extension) for the rendering",
+    "variants": {
+       "half":{
+           "bottom" : {
+               "model": "achaea:submodels/half_slab_bottom"
+           },
+           "top" : {
+                "model": "achaea:submodels/half_slab_top"
+           }
+       },
+       "variant": {
+            "chimeran_brick_slab" : {
+                "textures" : {
+                    "texture" : "achaea:blocks/chimeran/brick"
+                }
+            },
+            "chimeran_concrete_slab" : {
+                "textures" : {
+                    "texture" : "achaea:blocks/chimeran/concrete"
+                }
+            },
+            "chimeran_brick_cracked_slab" : {
+                "textures" : {
+                    "texture" : "achaea:blocks/chimeran/brickcracked"
+                }
+            }
+       }
+   }
+}

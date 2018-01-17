@@ -17,14 +17,20 @@ import tschallacka.achaea.blocks.stone.StoneFence;
 import tschallacka.achaea.blocks.stone.StoneWall;
 import tschallacka.achaea.blocks.stone.chimeran.ChimeranBlock;
 import tschallacka.achaea.blocks.stone.chimeran.ChimeranType;
+import tschallacka.achaea.blocks.stone.slab.StoneDoubleSlab;
+import tschallacka.achaea.blocks.stone.slab.StoneHalfSlab;
+import tschallacka.achaea.blocks.stone.slab.StoneSlab;
+import tschallacka.achaea.item.blocks.ItemAchaeanSlab;
 import tschallacka.achaea.item.blocks.ItemBlockMeta;
 
 public final class AchaeanBlocks {
+    
+
     /**
      * This list will be used to get all the variant blocks that need to be registered<BR/>
      * for rendering. All blocks registered here will be rendered as items in creative tab etc...
      */
-    private static List<Block> blocks = new ArrayList<Block>(2);
+    private static List<Block> blocks = new ArrayList<Block>(7);
     
     public static ChimeranBlock CHIMERAN;
     
@@ -37,6 +43,8 @@ public final class AchaeanBlocks {
 	public static StoneFence STONE_FENCE;
 	
 	public static StoneWall STONE_WALL; 
+	
+	public static StoneSlab STONE_SLAB;
     /**
      * Called in preInit
      * @see tschallacka.achaea.proxy.CommonProxy#preInit(net.minecraftforge.fml.common.event.FMLPreInitializationEvent)
@@ -49,13 +57,48 @@ public final class AchaeanBlocks {
         blocks.registerMetaBlock(STONE_FENCE = new StoneFence(), "stone_fence");
         blocks.registerMetaBlock(STONE_WALL = new StoneWall(), "stone_wall");
         
+        
         CHIMERAN_BRICK_STAIR = blocks.registerStair(CHIMERAN, ChimeranType.CHIMERAN_BRICK);
         CHIMERAN_CRACKED_BRICK_STAIR = blocks.registerStair(CHIMERAN, ChimeranType.CHIMERAN_BRICK_CRACKED);
         CHIMERAN_CONCRETE_STAIR = blocks.registerStair(CHIMERAN, ChimeranType.CHIMERAN_CONCRETE);
+        STONE_SLAB = blocks.createStoneSlab();
         
     }
     
-    
+    private void setName(String name, Block... blocks) {
+        for(Block block : blocks) {
+            block.setUnlocalizedName(name);
+            block.setRegistryName(name);
+        }
+    }
+    private StoneSlab createStoneSlab() 
+    {        
+        StoneHalfSlab slab = new StoneHalfSlab();
+        StoneDoubleSlab doubleSlab = new StoneDoubleSlab();
+        this.registerSlab("stone", slab, doubleSlab);
+        return slab;
+    }
+    private void registerSlab(String name, AchaeanSlab slab, AchaeanSlab doubleSlab) 
+    {
+        String halfSlabName = name + "_slab";
+        String doubleSlabName = name + "_double_slab";
+        this.setName(halfSlabName, slab);
+        this.setName(doubleSlabName, doubleSlab);
+        
+        GameRegistry.registerBlock(
+            slab,
+            ItemAchaeanSlab.class,
+            slab,
+            doubleSlab,
+            false);
+        GameRegistry.registerBlock(
+            doubleSlab,
+            ItemAchaeanSlab.class,
+            slab,
+            doubleSlab,
+            true);
+        blocks.add(slab);
+    }
     /**
      * Registers a stair on basis of the INamed Property.
      * Will need a blockstate in /assets/blockstates/[PROPERTY_NAME]_stair.json
@@ -112,8 +155,7 @@ public final class AchaeanBlocks {
      */
     private Block registerMetaBlock(Block block, String name) 
     {
-        block.setUnlocalizedName(name);
-        block.setRegistryName(name);
+        this.setName(name, block);
         GameRegistry.registerBlock(block, ItemBlockMeta.class, name);
         this.blocks.add(block);
         return block;
